@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My S3 Website</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&family=Newsreader:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #eef4f7;
+    --ink: #10283d;
+    --muted: #4d6577;
+    --sea: #0b5fff;
+    --sand: #ffd27a;
+    --line: #c9d8e2;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Newsreader", Georgia, serif;
+    font-size: 1.15rem;
+    line-height: 1.65;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 1.5rem; }
+  header { padding: 1.5rem 0; display: flex; justify-content: space-between; align-items: center; }
+  .logo { font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 1.2rem; }
+  nav a {
+    font-family: "Bricolage Grotesque", sans-serif;
+    color: var(--ink); text-decoration: none; margin-left: 1.5rem; font-size: 1rem;
+  }
+  nav a:hover, nav a:focus-visible { color: var(--sea); text-decoration: underline; text-underline-offset: 4px; }
+
+  .hero { padding: 5rem 0 4rem; }
+  h1 {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.8rem, 9vw, 6.5rem);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    max-width: 11ch;
+  }
+  .hero p { max-width: 38rem; margin-top: 1.75rem; color: var(--muted); font-size: 1.3rem; }
+  .btn {
+    display: inline-block; margin-top: 2rem; padding: 0.8rem 1.5rem;
+    background: var(--ink); color: #fff; text-decoration: none;
+    font-family: "Bricolage Grotesque", sans-serif; font-weight: 600; border-radius: 6px;
+  }
+  .btn:hover, .btn:focus-visible { background: var(--sea); }
+
+  section { padding: 3.5rem 0; border-top: 1px solid var(--line); }
+  h2 { font-family: "Bricolage Grotesque", sans-serif; font-size: 1.8rem; margin-bottom: 1rem; letter-spacing: -0.01em; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+  @media (max-width: 700px) { .two { grid-template-columns: 1fr; gap: 1.5rem; } }
+
+  ul.skills { list-style: none; padding: 0; }
+  ul.skills li { padding: 0.6rem 0; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; }
+  ul.skills span { color: var(--muted); font-style: italic; }
+
+  .flow { display: flex; align-items: stretch; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem; }
+  .step { flex: 1 1 180px; padding: 1.2rem; border: 2px solid var(--ink); border-radius: 8px; background: #fff; }
+  .step strong { font-family: "Bricolage Grotesque", sans-serif; display: block; margin-bottom: 0.25rem; }
+  .step small { color: var(--muted); font-size: 0.95rem; line-height: 1.4; display: block; }
+  .step.bucket { background: var(--sand); }
+  .arrow { align-self: center; font-family: "Bricolage Grotesque", sans-serif; font-size: 1.5rem; color: var(--sea); }
+  @media (max-width: 700px) { .arrow { display: none; } }
+
+  footer { padding: 2.5rem 0 3rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 1rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">my-s3-site</div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#learning">Learning</a>
+      <a href="#how">How it works</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <h1>Served straight from a bucket.</h1>
+      <p>This page is a single HTML file sitting in Amazon S3, uploaded from the command line and delivered to your browser with no web server to manage.</p>
+      <a class="btn" href="#how">See how it works</a>
+    </div>
+
+    <section id="about">
+      <div class="two">
+        <div>
+          <h2>About me</h2>
+          <p>I'm a student at Kristiania University College getting hands-on with DevOps. This site is part of a lab exercise on hosting static content in the cloud.</p>
+        </div>
+        <div>
+          <h2>Why S3?</h2>
+          <p>Static files need storage, not servers. S3 is cheap, durable, and can serve a website directly once public access and a bucket policy are set up.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="learning">
+      <h2>What I'm learning</h2>
+      <ul class="skills">
+        <li>AWS S3 <span>buckets and website hosting</span></li>
+        <li>AWS CLI <span>uploading with s3 cp</span></li>
+        <li>Bucket policies <span>public read access</span></li>
+        <li>Python <span>PGR107</span></li>
+      </ul>
+    </section>
+
+    <section id="how">
+      <h2>How this page reaches you</h2>
+      <div class="flow">
+        <div class="step"><strong>Your browser</strong><small>Requests the website endpoint over HTTP</small></div>
+        <div class="arrow" aria-hidden="true">&rarr;</div>
+        <div class="step bucket"><strong>S3 bucket</strong><small>Looks up the index document and checks the bucket policy</small></div>
+        <div class="arrow" aria-hidden="true">&rarr;</div>
+        <div class="step"><strong>index.html</strong><small>Returned to you as the page you're reading</small></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>Hosted on Amazon S3. Built for a DevOps lab.</footer>
+</div>
+</body>
+</html>
